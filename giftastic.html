@@ -24,7 +24,7 @@
     <h1>Animal Search</h1>
 
     <!-- Rendered buttons will get dumped here  -->
-    <div id="buttons-view"></div>
+    <div id="buttons-view" class="panel panel-body"></div>
 
     <form id="category-form">
       <label for="category-input">Add an Animal Bro</label>
@@ -34,10 +34,13 @@
       <input id="add-category" type="submit" value="Submit">
     </form>
 
+     <blockquote class="panel panel-info">Note: You can click on the buttons to show the animal images.  Click an image to animate or pause (toggle).  Based on testing, there may be about 10-15 sec delay in initial animation.  This may be due to various reasons (i. e., cache memory loading, network congestion, cpu processing, etc). </blockquote>
+
     <!-- Categories will get dumped here -->
     <div id="categories-view"></div>
 
-    <!-- <img src="https://media3.giphy.com/media/pSpmpxFxFwDpC/200_s.gif" data-still="https://media3.giphy.com/media/pSpmpxFxFwDpC/200_s.gif" data-animate="https://media3.giphy.com/media/pSpmpxFxFwDpC/200.gif" data-state="still" class="gif"> -->
+    <!-- below is an example of html tags that will be rendered by JSON after javascript file has run: 
+    <img src="https://media3.giphy.com/media/pSpmpxFxFwDpC/200_s.gif" data-still="https://media3.giphy.com/media/pSpmpxFxFwDpC/200_s.gif" data-animate="https://media3.giphy.com/media/pSpmpxFxFwDpC/200.gif" data-state="still" class="gif"> -->
 
   </div>
 

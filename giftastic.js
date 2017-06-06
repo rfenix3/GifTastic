@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   console.log('game.js loaded');
 
@@ -6,7 +5,7 @@ $(document).ready(function() {
     var authKey = "dc6zaTOxFJmzC";
 
     // Initial array of categories
-    var categories = ["dog", "cat", "rabbit", "hamster"];
+    var categories = ["dog", "cat", "rabbit", "hamster", "skunk", "goldfish", "bird", "ferret", "turtle"];
 
     // displayCateoryInfo function re-renders the HTML to display the appropriate content
     function displayCategoryInfo() {
@@ -48,10 +47,16 @@ authKey + "&q=" + category + "&limit=" + "10";
               // Giving the image tag an src attribute of a property
               //categoryImage.attr("src", results[i].images.fixed_height_still.url);
 
+              // Add class
+              categoryImage.addClass("gif");
+
               // Add multiple attributes that can be used to animate the gifs when clicked
-              categoryImage.attr({src:results[i].images.fixed_height_still.url, 
-                dataStill:results[i].images.fixed_height_still.url, 
-                dataAnimate:results[i].images.fixed_height.url, dataState: "still", class:"gif"});
+              categoryImage.attr("src", results[i].images.fixed_height_still.url);
+              categoryImage.attr("data-still", results[i].images.fixed_height_still.url);
+              categoryImage.attr("data-animate", results[i].images.fixed_height.url);
+              categoryImage.attr("data-state", "still");
+
+              var state = $(categoryImage).attr("data-state");
 
               // Appending the paragraph and categoryImage we created to the "gifDiv" div we created
               gifDiv.append(p);
@@ -92,65 +97,54 @@ authKey + "&q=" + category + "&limit=" + "10";
       $("#add-category").on("click", function(event) {
         event.preventDefault();
         // This line of code will grab the input from the textbox
+
         var category = $("#category-input").val().trim();
+
+        // still working on validating if user did not enter any text
+        //if (category ==="" || IsNull(category)) {
+        //  alert("Please enter text");
+        //} else {
 
         // The category from the textbox is then added to our array
         categories.push(category);
 
         $("#category-input").val("");
 
+        console.log(categories);
+
         // Calling renderButtons which handles the processing of our category array
         renderButtons();
+      //}
       });
 
-      // Adding click event listeners to all elements with a class of "category"
+      function animatePause() {
+        
+        var state = $(this).attr("data-state");
+        var animatedSrc = $(this).attr("data-animate");
+        var stillSrc = $(this).attr("data-still");
+
+        console.log("Hello World!");
+        // If the clicked image's state is still, update its src attribute to what its data-animate value is.
+        // Then, set the image's data-state to animate
+        // Else set src to the data-still value
+      
+        if (state === "still") {
+          $(this).attr("src", animatedSrc);
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", stillSrc);
+          $(this).attr("data-state", "still");
+        }
+
+      };
+
+      // Adding click event listeners to all elements with a class of "category" (the buttons) 
+      // and "gif" (the images) so they can recognize click event.  Then call the following functions
+      // when they get clicked
       $(document).on("click", ".category", displayCategoryInfo);
+      $(document).on("click", ".gif", animatePause);
 
       // Calling the renderButtons function to display the intial buttons
       renderButtons();
-
-      $(".gif").on("click", function() {
-      // STEP ONE: study the html above.
-      // Look at all the data attributes.
-      // Run the file in the browser. Look at the images.
-
-      // After we complete steps 1 and 2 we'll be able to pause gifs from giphy.
-
-      // STEP TWO: make a variable named state and then store the image's data-state into it.
-      // Use the .attr() method for this.
-
-      // ============== FILL IN CODE HERE FOR STEP TWO =========================
-      var state = $(this).attr("data-state");
-      console.log(state);
-
-      // CODE GOES HERE
-
-      // =============================================
-
-      // STEP THREE: Check if the variable state is equal to 'still',
-      // then update the src attribute of this image to it's data-animate value,
-      // and update the data-state attribute to 'animate'.
-
-      // If state does not equal 'still', then update the src attribute of this
-      // image to it's data-animate value and update the data-state attribute to 'still'
-      // ============== FILL IN CODE HERE FOR STEP THREE =========================
-
-      if (state === "still") {
-        $(this).attr("src", $(this).attr("dataanimate"));
-        // var newState = $(this).attr("data-state", "animate");
-        // console.log(newState);
-      } else {
-        $(this).attr("src", $(this).attr("datastill"));
-        // var newState = $(this).attr("data-state", "still"); 
-        // console.log(newState);       
-      }
-
-      // CODE GOES HERE
-
-      // ==============================================
-
-      // STEP FOUR: open the file in the browser and click on the images.
-      // Then click again to pause.
-    });  
 
 });
