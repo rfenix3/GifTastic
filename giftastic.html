@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Animal</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Animal Search</h1>
+
+    <!-- Rendered buttons will get dumped here  -->
+    <div id="buttons-view"></div>
+
+    <form id="category-form">
+      <label for="category-input">Add an Animal Bro</label>
+      <input type="text" id="category-input"><br>
+
+      <!-- Button triggers new category to be added -->
+      <input id="add-category" type="submit" value="Submit">
+    </form>
+
+    <!-- Categories will get dumped here -->
+    <div id="categories-view"></div>
+
+    <!-- <img src="https://media3.giphy.com/media/pSpmpxFxFwDpC/200_s.gif" data-still="https://media3.giphy.com/media/pSpmpxFxFwDpC/200_s.gif" data-animate="https://media3.giphy.com/media/pSpmpxFxFwDpC/200.gif" data-state="still" class="gif"> -->
+
+  </div>
+
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="giftastic.js"></script>
+
+</body>
+
+</html>
